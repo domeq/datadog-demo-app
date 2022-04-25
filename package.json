@@ -1,0 +1,21 @@
+{
+  "name": "demo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serverless": "serverless"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dd-trace": "^2.5.0",
+    "serverless": "^3.15.2",
+    "serverless-offline": "^8.7.0",
+    "serverless-plugin-datadog": "^5.0.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}

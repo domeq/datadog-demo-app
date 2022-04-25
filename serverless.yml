@@ -1,0 +1,50 @@
+service: demo-app
+plugins:
+  - serverless-offline
+  - serverless-plugin-datadog
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-central-1
+  endpointType: regional
+  versionFunctions: false
+  memorySize: 1024
+  timeout: 10
+  logRetentionInDays: 1
+  environment:
+    NODE_ENV: ${self:custom.stage}
+  tags:
+    billed-team: niche-destinations
+    billed-service: datadog-demo-app
+    realm: ${self:custom.stage}
+    version: ${env:npm_package_version}
+  apiGateway:
+    shouldStartNameWithService: true
+  httpApi:
+    payload: '1.0'
+  stackTags:
+    billed-team: niche-destinations
+    billed-service: datadog-demo-app
+    realm: ${self:custom.stage}
+    version: ${env:npm_package_version}
+
+custom:
+  stage: ${opt:stage, "feature"}
+  datadog:
+    service: datadog-demo-app
+    env: ${self:custom.stage}
+    version: ${env:npm_package_version}
+  serverless-offline:
+    noPrependStageInUrl: true
+
+functions:
+  index:
+    handler: src/handlers/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  
