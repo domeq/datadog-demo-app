@@ -16,6 +16,7 @@ provider:
   logRetentionInDays: 1
   environment:
     NODE_ENV: ${self:custom.stage}
+    DD_TRACE_DEBUG: true
   tags:
     billed-team: niche-destinations
     billed-service: datadog-demo-app
@@ -37,6 +38,7 @@ custom:
     service: datadog-demo-app
     env: ${self:custom.stage}
     version: ${env:npm_package_version}
+    logLevel: DEBUG
   serverless-offline:
     noPrependStageInUrl: true
 
